@@ -262,7 +262,10 @@ class UsePaypalState extends State<UsePaypal> {
                                             onCancel: widget.onCancel,
                                             onError: widget.onError)),
                                   );
-                                  widget.callback();
+                                  Future.delayed(
+                                    const Duration(milliseconds: 500),
+                                    widget.callback,
+                                  );
                                 }
                                 if (request.url.contains(widget.cancelURL)) {
                                   final uri = Uri.parse(request.url);
