@@ -21,6 +21,7 @@ class UsePaypal extends StatefulWidget {
     required this.onSuccess,
     required this.onError,
     required this.onCancel,
+    required this.callback,
     required this.returnURL,
     required this.cancelURL,
     required this.transactions,
