@@ -12,7 +12,7 @@ import 'src/PaypalServices.dart';
 import 'src/errors/network_error.dart';
 
 class UsePaypal extends StatefulWidget {
-  final Function onSuccess, onCancel, onError;
+  final Function onSuccess, onCancel, onError, callback;
   final String returnURL, cancelURL, note, clientId, secretKey;
   final List transactions;
   final bool sandboxMode;
@@ -249,7 +249,7 @@ class UsePaypalState extends State<UsePaypal> {
                                   return NavigationDecision.prevent;
                                 }
                                 if (request.url.contains(widget.returnURL)) {
-                                  Navigator.pushReplacement(
+                                  await Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => CompletePayment(
@@ -261,6 +261,7 @@ class UsePaypalState extends State<UsePaypal> {
                                             onCancel: widget.onCancel,
                                             onError: widget.onError)),
                                   );
+                                  widget.callback();
                                 }
                                 if (request.url.contains(widget.cancelURL)) {
                                   final uri = Uri.parse(request.url);
